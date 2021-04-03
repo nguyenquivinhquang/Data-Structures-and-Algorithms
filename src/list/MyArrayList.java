@@ -39,17 +39,11 @@ public class MyArrayList<E> implements java.util.List<E> {
             throw new IndexOutOfBoundsException(message);
         }
     }
-
-    ///
     @Override
-    public int size() {
-        return this.size;
-    }
+    public int size() {return this.size;}
 
     @Override
-    public boolean isEmpty() {
-        return this.size == 0;
-    }
+    public boolean isEmpty() {return this.size == 0;}
 
     @Override
     public boolean contains(Object o) {
@@ -64,9 +58,7 @@ public class MyArrayList<E> implements java.util.List<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
-        return new MyIterator();
-    }
+    public Iterator<E> iterator() {return new MyIterator();}
 
     @Override
     public Object[] toArray() {
