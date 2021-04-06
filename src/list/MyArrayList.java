@@ -8,10 +8,9 @@ public class MyArrayList<E> implements java.util.List<E> {
     private static enum MoveType {
         NEXT, PREV
     }
-    private static final int MAX_CAPACITY = Integer.MAX_VALUE - 8;
+    private static int MAX_CAPACITY = Integer.MAX_VALUE - 8;
     private E[] elements;
     private int size;
-
     //Constructor:
     public MyArrayList(int capacity) throws IllegalArgumentException {
         if ((capacity < 0) || (capacity > MAX_CAPACITY)) {
@@ -22,9 +21,8 @@ public class MyArrayList<E> implements java.util.List<E> {
         this.elements = (E[]) new Object[capacity];
         this.size = 0;
     }
-
-    public MyArrayList() throws IllegalArgumentException {this(10);}
-
+    public MyArrayList() throws IllegalArgumentException {
+	this(10);}
     //Utitilies
     private void checkValidIndex(int index, int min, int max) {
         if ((index < min) || (index > max)) {
@@ -48,18 +46,16 @@ public class MyArrayList<E> implements java.util.List<E> {
     }
     @Override
     public Iterator<E> iterator() {return new MyIterator();}
-
     @Override
     public Object[] toArray() {return Arrays.copyOf(elements, size);}
     @Override
     public <T> T[] toArray(T[] a) {
         /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); .
     }
-
     @Override
     public boolean add(E e) {
-        if (e == null) throw new NullPointerException("Can not add null pointer");
+        if (e == null) throw new NullPointerException("Can't add null pointer");
         checkCapacity(this.size + 1);
         this.elements[this.size++] = e;
         return true;
@@ -73,10 +69,8 @@ public class MyArrayList<E> implements java.util.List<E> {
             int oldCapacity = this.elements.length;
             int newCapacity = oldCapacity + (oldCapacity / 2);
             if (newCapacity < 0) newCapacity = MAX_CAPACITY;
-            this.elements = Arrays.copyOf(this.elements, newCapacity);
-        }
+            this.elements = Arrays.copyOf(this.elements, newCapacity);}
     }
-
     @Override
     public boolean remove(Object o) {
         int index = indexOf(o);
@@ -86,33 +80,31 @@ public class MyArrayList<E> implements java.util.List<E> {
     }
     public boolean containsAll(Collection<?> c) {
         /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
     @Override
     public boolean addAll(Collection<? extends E> c) {
         /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
-
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
         /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     @Override
     public boolean removeAll(Collection<?> c) {
         /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
     @Override
     public boolean retainAll(Collection<?> c) {
         /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
     @Override
     public void clear() {
-        while (isEmpty() == false)
-            remove(0);
+        while (isEmpty() == false) remove(0);
     }
     @Override
     public E get(int index) {
@@ -153,8 +145,7 @@ public class MyArrayList<E> implements java.util.List<E> {
             if (this.elements[idx].equals(o)) { //== not
                 foundIdx = idx;
                 break;
-            }
-        }
+            }}
         return foundIdx;
     }
     @Override
@@ -164,23 +155,18 @@ public class MyArrayList<E> implements java.util.List<E> {
             if (this.elements[idx].equals(o)) {
                 foundIdx = idx;
                 break;
-            }
-        }
+            }}
         return foundIdx;
     }
     @Override
     public ListIterator<E> listIterator() {return new MyListIterator();}
-
     @Override
-    public ListIterator<E> listIterator(int index) {return new MyListIterator(index);
-    }
-
+    public ListIterator<E> listIterator(int index) {
+	return new MyListIterator(index);}
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
         /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+        throw new UnsupportedOperationException("Not supported yet.");}
     @Override
     public String toString() {
         String desc = "[";
@@ -193,7 +179,6 @@ public class MyArrayList<E> implements java.util.List<E> {
             desc = desc.substring(0, desc.length() - 1);
         return desc + "]";
     }
-
     //Definition of Inner Class
     public class MyIterator implements Iterator<E> {
         int cursor = 0;
@@ -201,8 +186,7 @@ public class MyArrayList<E> implements java.util.List<E> {
         boolean afterMove = false;
         @Override
         public boolean hasNext() {
-            return this.cursor != MyArrayList.this.size;
-        }
+            return this.cursor != MyArrayList.this.size; }
         @Override
         //Move cursor to next + return preivous element
         public E next() {
@@ -211,7 +195,6 @@ public class MyArrayList<E> implements java.util.List<E> {
             afterMove = true;
             return MyArrayList.this.elements[cursor - 1];
         }
-
         @Override
         public void remove() {
             if (!afterMove) return;
@@ -228,13 +211,11 @@ public class MyArrayList<E> implements java.util.List<E> {
         @Override
         public void remove() {
             if (!afterMove) return;
-            if (moveType == MoveType.NEXT) {
-                super.remove();
-            } else {
+            if (moveType == MoveType.NEXT) super.remove();
+             else {
                 MyArrayList.this.remove(cursor);
                 afterMove = false;
-            }
-        }
+            }}
         @Override
         public E previous() {
             cursor -= 1;
@@ -246,23 +227,20 @@ public class MyArrayList<E> implements java.util.List<E> {
         public int nextIndex() { return cursor;}
         @Override
         public int previousIndex() { return cursor - 1;}
-
         @Override
         public void set(E e) {
             if (!afterMove) return;
             if (moveType == MoveType.NEXT) MyArrayList.this.set(cursor - 1, e);
-             else MyArrayList.this.set(cursor, e); 
+            else MyArrayList.this.set(cursor, e); 
         }
         @Override
         public void add(E e) {
             if (!afterMove) return;
-            
             if (moveType == MoveType.NEXT) {
                 MyArrayList.this.add(cursor - 1, e);
             } else MyArrayList.this.add(cursor, e);
             cursor += 1;
             afterMove = false;
         }
-
-    }//End of MyListIterator
-}//End of MyArrayList
+    }
+}
