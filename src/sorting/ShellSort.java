@@ -3,7 +3,7 @@ package sorting;
 import java.util.Comparator;
 
 public class ShellSort<E> implements ISort<E> {
-
+    // shell short with segments divided / 2 after each itearations
     @Override
     public void sort(E[] array, Comparator<E> comparator) {
         int n = array.length;
