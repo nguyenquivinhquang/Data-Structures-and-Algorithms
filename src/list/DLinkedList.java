@@ -12,11 +12,7 @@ import java.util.ListIterator;
 
 
 public class DLinkedList<E> implements List<E> {
-    private static enum MoveType {
-        NEXT, PREV
-    }
-
-    ;
+    private static enum MoveType { NEXT, PREV }
     private Node<E> head;
     private Node<E> tail;
     private int size;
@@ -35,13 +31,7 @@ public class DLinkedList<E> implements List<E> {
         tail.prev = head;
         size = 0;
     }
-
-    //////////////////////////////////////////////////////////////////////////
-    /////////////////// Utility methods (private)         ////////////////////
-    ////////////////////////////////////////////////////////////////////////// 
-    /*
-    checkValidIndex: assert that "index" inside of [min, max]
-    */
+    //checkValidIndex: assert that "index" inside of [min, max]
     private void checkValidIndex(int index, int min, int max) {
         if ((index < min) || (index > max)) {
             String message = String.format("Invalid index (=%d)", index);
@@ -131,46 +121,28 @@ public class DLinkedList<E> implements List<E> {
     /////////////////// API of Doubble-Linked List         ///////////////////
     ////////////////////////////////////////////////////////////////////////// 
     @Override
-    public int size() {
-
-        return this.size;
-    }
-
+    public int size() { return this.size;}
     @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
+    public boolean isEmpty() { return size == 0;}
     @Override
     public boolean contains(Object o) {
-
         Node<E> curNode = head.next;
-
         while (curNode != tail) {
-            if (curNode.element.equals(o)) {
-                return true;
-            }
+            if (curNode.element.equals(o)) return true;
             curNode = curNode.next;
         }
         return false; //should remove this line
     }
-
     @Override
-    public Iterator<E> iterator() {
-
-        return new FBWDIterator(); //should remove this line
-    }
-
+    public Iterator<E> iterator() {return new FBWDIterator();}
     @Override
     public Object[] toArray() {
-        /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
     private void checkValidIndex(int index) {
         if ((index < 0) || (index >= size)) {
@@ -190,8 +162,6 @@ public class DLinkedList<E> implements List<E> {
         size += 1 ;
         return true;
     }
-
-
     @Override
     public boolean remove(Object o) {
         Node<E> curNode = head.next;
@@ -206,34 +176,18 @@ public class DLinkedList<E> implements List<E> {
     }
 
     @Override
-    public boolean containsAll(Collection<?> c) {
-        /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    public boolean containsAll(Collection<?> c) { throw new UnsupportedOperationException("Not supported yet.");}
     @Override
-    public boolean addAll(Collection<? extends E> c) {
-        /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    public boolean addAll(Collection<? extends E> c) { throw new UnsupportedOperationException("Not supported yet."); }
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+        throw new UnsupportedOperationException("Not supported yet.");}
     @Override
     public boolean removeAll(Collection<?> c) {
-        /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+        throw new UnsupportedOperationException("Not supported yet.");}
     @Override
     public boolean retainAll(Collection<?> c) {
-        /*IMPLEMENTATION: NOT REQUIRED*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        throw new UnsupportedOperationException("Not supported yet.");}
 
     @Override
     public void clear() {
@@ -244,12 +198,10 @@ public class DLinkedList<E> implements List<E> {
             removeNode(curNode);
             curNode = nextNode;
         }
-        //reset head and tail
         head.next = tail;
         tail.prev = head;
         size = 0;
     }
-
 
     @Override
     public E get(int index) {
@@ -262,9 +214,7 @@ public class DLinkedList<E> implements List<E> {
             curNode = curNode.next;
         }
         return curNode.element;
-
     }
-
     @Override
     public E set(int index, E element) {
         if (index < 0 || index >= size) {
@@ -272,13 +222,10 @@ public class DLinkedList<E> implements List<E> {
             throw new IndexOutOfBoundsException(message);
         }
         Node<E> curNode = head.next;
-        for (int i = 1; i <= index; i++) {
-            curNode = curNode.next;
-        }
+        for (int i = 1; i <= index; i++) curNode = curNode.next;
         curNode.element = element;
-        return curNode.element; //should remove this line
+        return curNode.element; 
     }
-
     @Override
     public void add(int index, E element) {
         if (index < 0 || index > size) {
