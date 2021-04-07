@@ -1,27 +1,19 @@
-package sorting;
-
-import java.util.Comparator;
 /*
-Method: Bubble sort
-Objective: Sort the array in descending or ascending
----
-1/ Space complexity: O(n)
-Reasons:
-    + To store the array
-Computational complexity:
-    + Average case O(n ^ 2)
-*/
-public class BubbleSort <E> implements ISort<E>  {
+ * Bubble sort is the worst since for each of the `n - 1` iterations
+ * it always iterates through the array `n - i - 1` times where `i` is the
+ * `i-th` iteration, which is more than all other algorithms since other
+ * algorithms has a stop condition for the inner loop but Bubble sort does not.
+ */
+package sorting;
+import java.util.Comparator;
+public class BubbleSort<E> implements ISort<E> {
     @Override
-    public void sort(E[] array, Comparator<E> comparator) {
-        int n = array.length;
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < n - i - 1; j++) {
-                if (comparator.compare(array[j + 1], array[j]) < 0) {
-                    E temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
-                }
-            }
-    }
+    public void sort(E arr[], Comparator<E> comparator) { 
+        int n = arr.length; 
+        for (int i = 0; i < n-1; i++) 
+            for (int j = 0; j < n-i-1; j++) 
+                if (comparator.compare(arr[j], arr[j + 1]) > 0) { 
+                    E temp = arr[j]; arr[j] = arr[j+1]; arr[j+1] = temp; 
+                } 
+    } 
 }
