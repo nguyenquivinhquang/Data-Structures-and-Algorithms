@@ -20,11 +20,8 @@ public class StraightSelectionSort<E> implements ISort<E> {
             for (int j = i + 1; j < n; j++)
                 if (comparator.compare(array[j], array[min_idx]) < 0)
                     min_idx = j;
-
             // Swap the found minimum element with the firs element
-            E temp = array[min_idx];
-            array[min_idx] = array[i];
-            array[i] = temp;
+            E temp = array[min_idx]; array[min_idx] = array[i];  array[i] = temp;
         }
     }
 }
