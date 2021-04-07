@@ -1,5 +1,4 @@
 package sorting;
-
 import java.util.Comparator;
 
 public class ShellSort<E> implements ISort<E> {
@@ -24,7 +23,6 @@ public class ShellSort<E> implements ISort<E> {
     }
     private void sortSegment(E arr[], int l, int r, Comparator<E> comparator) {
         if (r - l + 1 <= 1) return;
-        
         int current, walker, n = r - l + 1;
         E temp;
         current = 1;
@@ -53,6 +51,5 @@ public class ShellSort<E> implements ISort<E> {
                 array[j] = temp;
             }
         }
-
     }
 }
