@@ -2,38 +2,37 @@ package sorting;
 import java.util.Comparator;
 
 public class ShellSort<E> implements ISort<E> {
-   /*
-    Sort segement k:
-    
-    */
-    public static void sort_segment(Point2D[] points, int segment_idx, int num_segment){
-        int current;
-        int walker;
-        Point2D temp;
-        current = segment_idx + num_segment;
-        while(current < points.length){
-            temp = points[current];
-            walker = current - num_segment;
-            while((walker >= 0) && (temp.getX() < points[walker].getX()) ){
-                points[walker + num_segment] = points[walker]; //shift to right
-                walker -= num_segment;
-            }
-            points[walker + num_segment] = temp;
-            current += num_segment;
-        }
-    }
-    /*
-    shell_sort
-    -----------
-    num_segments: 
-         + The first must be 1, for examples: [1,3,7]
-    */
-    public static void shell_sort(Point2D[] points, int[] num_segment){
-        for(int k=num_segment.length - 1; k > 0; k--){
-            for(int segment_idx = 0; segment_idx < k; segment_idx++)
-                sort_segment(points, segment_idx, k);
-        }
-    }
+    //Sort segement k:
+    /* To call this method, 
+	int[] num_segment = {1, 3, 7}; shell_sort(list, num_segment);	*/
+    private int[] num_segment;  
+    public ShellSort(int[] num_segment){  
+        this.num_segment = num_segment;  
+    }  
+    public static <E> void sortSegment(E[] array, int segment_idx, int num_segment,  
+            Comparator<E> comparator){  
+        int current;  
+        int walker;  
+        E temp;  
+        current = segment_idx + num_segment;  
+        while(current < array.length){  
+            temp = array[current];  
+            walker = current - num_segment;  
+            while((walker >= 0) &&  comparator.compare(temp, array[walker]) < 0 ){  
+                array[walker + num_segment] = array[walker]; //shift to right  
+                walker -= num_segment;  
+            }  
+            array[walker + num_segment] = temp;  
+            current += num_segment;  
+        }  
+    }  
+    public void sort(E[] array, Comparator<E> comparator){  
+        for(int k= num_segment.length - 1; k >= k > 0; k--){  
+            int nsegment = num_segment[k];  
+            for(int segment_idx = 0; segment_idx < k; segment_idx++)  
+                ShellSort.sortSegment(array, segment_idx, nsegment, comparator);  
+        }  
+
     // Another shell sort method, shell sort with segments divided / 2 after each itearations
     @Override
     public void sortSegmentMethod2(E[] array, Comparator<E> comparator) {
