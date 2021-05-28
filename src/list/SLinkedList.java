@@ -69,10 +69,7 @@ public class SLinkedList<E> implements java.util.List<E> {
         }
 
         Node<E> curNode = head;
-        int runIndex = -1;
-        while (curNode != tail) {
-            if (index == runIndex) break;
-            runIndex += 1;
+        for (int curIndex = 0; curIndex <= index; curIndex++) {
             curNode = curNode.next;
         }
         return curNode;
@@ -254,17 +251,12 @@ public class SLinkedList<E> implements java.util.List<E> {
     @Override
     public int indexOf(Object o) {
         Node<E> curNode = head.next;
-        int foundIdx = -1;
-        int index = 0;
-        while (curNode != tail) {
-            if (curNode.element.equals(o)) {
-                foundIdx = index;
-                break;
-            }
-            index += 1;
+        for (int index = 0; index < size; index++) {
+            if (curNode.element.equals(o))
+                return index;
             curNode = curNode.next;
         }
-        return foundIdx;
+        return -1;
     }
 
     @Override

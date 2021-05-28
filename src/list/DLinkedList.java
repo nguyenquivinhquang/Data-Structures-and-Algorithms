@@ -262,7 +262,6 @@ public class DLinkedList<E> implements List<E> {
             curNode = curNode.next;
         }
         return curNode.element;
-
     }
 
     @Override
@@ -288,6 +287,7 @@ public class DLinkedList<E> implements List<E> {
         Node<E> curNode = head.next;
         int curIndex = 0;
         Node<E> newNode = new Node(null, null, element);
+
         if (index == 0) {
             insertLnewR(head, newNode, head.next);
             return;
@@ -328,33 +328,21 @@ public class DLinkedList<E> implements List<E> {
     @Override
     public int indexOf(Object o) {
         Node<E> curNode = head.next;
-        int foundIdx = -1;
-        int index = 0;
-        while (curNode != tail) {
-            if (curNode.element.equals(o)) {
-                foundIdx = index;
-                break;
-            }
-            index += 1;
+        for (int index = 0; index < size; index++) {
+            if (curNode.element.equals(o)) return index;
             curNode = curNode.next;
         }
-        return foundIdx;
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        Node<E> curNode = head.next;
-        int foundIdx = -1;
-        int index = 0;
-        while (curNode != tail) {
-            if (curNode.element.equals(o)) {
-                foundIdx = index;
-                //continue to find, instead of break here
-            }
-            index += 1;
-            curNode = curNode.next;
+        Node<E> curNode = tail.prev;
+        for (int index = size - 1; index >= 0; index--) {
+            if (curNode.element.equals(o)) return index;
+            curNode = curNode.prev;
         }
-        return foundIdx;
+        return  -1;
     }
 
     @Override
@@ -364,7 +352,6 @@ public class DLinkedList<E> implements List<E> {
 
     @Override
     public ListIterator<E> listIterator(int index) {
-
         return new FBWDIterator(index);
     }
 

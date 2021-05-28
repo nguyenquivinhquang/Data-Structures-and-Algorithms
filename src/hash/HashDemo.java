@@ -5,6 +5,9 @@
  */
 package hash;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author LTSACH
@@ -24,5 +27,12 @@ public class HashDemo {
         System.out.printf("Value:%d is %s.\n", 4, map.containsValue(4)?"found":"not found");
         System.out.printf("Value:%d is %s.\n", 7, map.containsValue(7)?"found":"not found");
         System.out.printf("Value:%d is %s.\n", 14, map.containsValue(14)?"found":"not found");
+        Map<String, Integer> team1 = new HashMap<String, Integer>();
+        team1.put("foo", 1);
+        team1.put("bar", 2);
+
+        for ( String key : team1.keySet() ) {
+            System.out.println( key );
+        }
     }
 }

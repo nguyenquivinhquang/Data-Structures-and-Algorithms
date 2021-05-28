@@ -40,7 +40,7 @@ public class O2PointComparator implements Comparator<Point2D> {
 
     @Override
     public int compare(Point2D o1, Point2D o2) {
-        double o1_dist = this.origin.distanceAB(o1), o2_dist = this.origin.distanceAB(o2);
+        double o1_dist = this.origin.distanceTo(o1), o2_dist = this.origin.distanceTo(o2);
         if (Math.abs(o1_dist - o2_dist) < 1e-9) return 0;
         else if (o1_dist < o2_dist) return -1 * direction.getConstant();
         else return 1 * direction.getConstant();

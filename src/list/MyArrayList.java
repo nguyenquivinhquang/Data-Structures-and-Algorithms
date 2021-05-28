@@ -1,4 +1,3 @@
-
 package list;
 
 import java.util.Arrays;
@@ -191,26 +190,22 @@ public class MyArrayList<E> implements java.util.List<E> {
 
     @Override
     public int indexOf(Object o) {
-        int foundIdx = -1;
         for (int idx = 0; idx < this.size; idx++) {
             if (this.elements[idx].equals(o)) { //== not
-                foundIdx = idx;
-                break;
+                return idx;
             }
         }
-        return foundIdx;
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        int foundIdx = -1;
         for (int idx = this.size - 1; idx >= 0; idx--) {
             if (this.elements[idx].equals(o)) {
-                foundIdx = idx;
-                break;
+               return idx;
             }
         }
-        return foundIdx;
+        return -1;
     }
 
     @Override
@@ -336,4 +331,3 @@ public class MyArrayList<E> implements java.util.List<E> {
 
     }//End of MyListIterator
 }//End of MyArrayList
-

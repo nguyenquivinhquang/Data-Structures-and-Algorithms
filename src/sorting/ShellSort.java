@@ -6,7 +6,7 @@ public class ShellSort<E> implements ISort<E> {
     /* To call this method, 
 	int[] num_segment = {1, 3, 7}; shell_sort(list, num_segment);	*/
     private int[] num_segment;  
-    public ShellSort(int[] num_segment){  
+    public ShellSort(){
         this.num_segment = num_segment;  
     }  
     public static <E> void sortSegment(E[] array, int segment_idx, int num_segment,  
@@ -27,14 +27,15 @@ public class ShellSort<E> implements ISort<E> {
         }  
     }  
     public void sort(E[] array, Comparator<E> comparator){  
-        for(int k= num_segment.length - 1; k >= k > 0; k--){  
+        for(int k= num_segment.length - 1; k > 0; k--){
             int nsegment = num_segment[k];  
             for(int segment_idx = 0; segment_idx < k; segment_idx++)  
                 ShellSort.sortSegment(array, segment_idx, nsegment, comparator);  
-        }  
+        }
+    }
 
     // Another shell sort method, shell sort with segments divided / 2 after each itearations
-    @Override
+
     public void sortSegmentMethod2(E[] array, Comparator<E> comparator) {
         int n = array.length;
         int interval = n;

@@ -87,7 +87,6 @@ public class Heap<T> implements IHeap<T>{
             if (elements[curNode].equals(item)) return  curNode;
             if (aLTb(item, elements[curNode]) == false) return -1;
 
-
             return Math.max(getItem(item, curNode * 2), getItem(item,  curNode * 2 + 1));
 
     }

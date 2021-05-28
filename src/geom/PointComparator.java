@@ -8,6 +8,9 @@ import java.util.Comparator;
 
 
 public class PointComparator implements Comparator<Point2D>{
+    public PointComparator(boolean isAscending) {
+    }
+
     @Override
     public int compare(Point2D o1, Point2D o2) {
         if(Math.abs(o1.getX() - o2.getX()) < 1e-7) return 0;

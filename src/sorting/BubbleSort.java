@@ -1,7 +1,7 @@
 package sorting;
 import java.util.Comparator;
 public class BubbleSort<E> implements ISort<E> {
-    public static void sort(E arr[], Comparator<E> comparator){
+    public void sort(E arr[], Comparator<E> comparator){
         int current, walker;
         boolean flag;
         current = 0; 

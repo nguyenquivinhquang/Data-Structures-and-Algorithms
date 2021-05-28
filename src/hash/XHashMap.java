@@ -5,7 +5,10 @@
  */
 package hash;
 
-import java.util.Arrays;
+import list.MyArrayList;
+import list.SLinkedList;
+
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,7 +21,7 @@ public class XHashMap<K, V> implements IMap<K,V>{
     private Entry<K,V>[] table;
     private int size;
     private float loadFactor;
-    
+
     public XHashMap(){
         this(10, 0.75f);
     }
@@ -40,13 +43,13 @@ public class XHashMap<K, V> implements IMap<K,V>{
             int newCapacity = 2*oldCapacity;
             if(newCapacity < 0) newCapacity = MAX_CAPACITY;
             rehash(newCapacity);
-        }        
+        }
     }
     private void rehash(int newCapacity){
         Entry<K,V>[] oldTable = this.table;
         this.table = new Entry[newCapacity];
         this.size = 0;
-        
+
         for(Entry<K, V> entry : oldTable) {
             while(entry != null){
                 this.put(entry.key, entry.value);
@@ -58,11 +61,11 @@ public class XHashMap<K, V> implements IMap<K,V>{
     protected int key2index(K key){
         return key.hashCode()%this.table.length;
     }
-    
+
     //////////////////////////////////////////////////////////////////////////
     /////////////////// API of XHashMap                    ///////////////////
     ////////////////////////////////////////////////////////////////////////// 
-    
+
     @Override
     public V put(K key, V value) {
         int index = this.key2index(key);
@@ -175,7 +178,7 @@ public class XHashMap<K, V> implements IMap<K,V>{
     public int size(){
         return this.size;
     }
-    
+
     public void println(){
         System.out.println(this.toString());
     }
@@ -196,10 +199,29 @@ public class XHashMap<K, V> implements IMap<K,V>{
         desc += String.format("%s\n", new String(new char[50]).replace('\0', '-'));
         return desc;
     }
-    
+
     /////////////////////////////////////////////////////////
     ///// The following methods are used for testing only ///
     /////////////////////////////////////////////////////////
+    // My add on function
+    public List keySet() {
+        List<V> list = new SLinkedList<>();
+        for(Entry<K, V> entry : this.table) {
+            while(entry != null){
+                list.add(entry.value);
+                entry = entry.next;
+            }
+        }
+        return list;
+    }
+    public java.util.Iterator<V> iterator() {
+        List<V> list = keySet();
+        return list.iterator();
+    }
+    public java.util.ListIterator<V> listIterator() {
+        List<V>  list = keySet();
+        return list.listIterator();
+    }
     public int capacity(){
         return this.table.length;
     }

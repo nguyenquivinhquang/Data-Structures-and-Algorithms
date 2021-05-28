@@ -15,7 +15,7 @@ public class SLinkedListDemo {
             Integer object = idx;
             list.add(object);
         }
-
+        // list = 0,1,2,3,4,5,6,7,8,9
         //(1)Print elements - Use Index, travel forward
         System.out.printf("%-25s", "Before modification:");
         for (Integer integer : list) {
@@ -23,7 +23,9 @@ public class SLinkedListDemo {
         }
         System.out.println();
         //(2)Remove odd numbers
+
         ListIterator<Integer> it = list.listIterator();
+
         while (it.hasNext()) {
             int item = it.next();
             if (item % 2 != 0) it.remove();
@@ -33,7 +35,8 @@ public class SLinkedListDemo {
         System.out.printf("%-25s", "After modification:");
         it = list.listIterator();
         while (it.hasNext()) {
-            System.out.printf("%s ", it.next());
+            int item = it.next();
+            System.out.printf("%s ", item);
         }
         System.out.println();
     }
@@ -58,7 +61,7 @@ public class SLinkedListDemo {
     }
 
     public static void main(String[] args) {
-        problem2();
+        problem1();
     }
 
 

@@ -22,7 +22,7 @@ class IntComparator implements Comparator<Integer>{
 public class HeapDemo {
     public static void main(String[] args){
         Heap<Integer> heap = new Heap<>(new IntComparator());
-        Integer[] array = {15, 17, 24, 6, 8, 22, 20};
+        Integer[] array = {1, 2, 3 ,4 ,5 ,6, 7};
 
         heap.heapify(array);
         System.out.printf("Find %d, result: %s\n", 4, (heap.contains(4) == true? "found": "not found") );
