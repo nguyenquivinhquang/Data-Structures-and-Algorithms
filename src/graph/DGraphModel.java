@@ -147,7 +147,16 @@ class TopoSorter<T>{
         Queue<T> queue = new Queue<>();
         for(T item: list) queue.push(item);
         
-        /*YOUR CODE HERE*/
+        while (queue.isEmpty() == false) {
+            T vertex = queue.pop();
+            topoOrder.add(vertex);
+            List<T> neighbors = this.graph.getOutwardEdges(vertex);
+            for (T v : neighbors) {
+                int prevDegree = indegreeMap.get(v);
+                indegreeMap.put(v, prevDegree - 1);
+                if (prevDegree == 1) queue.push(v);
+            }
+        }
 
         return topoOrder;
     }
