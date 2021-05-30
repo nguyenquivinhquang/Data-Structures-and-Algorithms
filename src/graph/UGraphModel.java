@@ -22,16 +22,25 @@ public class UGraphModel<T> extends AbstractGraph<T>{
     }
  
     @Override
-    public void connect(T from, T to) throws VertexNotFoundException{
-         /*YOUR CODE HERE*/
+    public void connect(T from, T to){
+        VertexNode<T> _from = getVertexNode(from), _to = getVertexNode(to);
+        checkNullVertex(_from, _to);
+        _from.connect(_to); _to.connect(_from);
+
     }
     @Override
-    public void connect(T from, T to, float weight) throws VertexNotFoundException{
-        /*YOUR CODE HERE*/
+    public void connect(T from, T to, float weight) {
+        VertexNode<T> _from = getVertexNode(from), _to = getVertexNode(to);
+        checkNullVertex(_from, _to);
+        _from.connect(_to, weight); _to.connect(_from, weight);
     }
     @Override
     public void disconnect(T from, T to) throws VertexNotFoundException, EdgeNotFoundException{
-        /*YOUR CODE HERE*/
+        VertexNode<T> _from = getVertexNode(from), _to = getVertexNode(to);
+        checkNullVertex(_from, _to);
+        Edge<T> edge = _from.getEdge(_to);
+        if (edge == null) throw new EdgeNotFoundException(String.format("E(from:%s, to:%s)", from, to));
+        _from.removeTo(_to); _to.removeTo(_from);
     }
     @Override
     public void remove(T vertex) throws VertexNotFoundException{

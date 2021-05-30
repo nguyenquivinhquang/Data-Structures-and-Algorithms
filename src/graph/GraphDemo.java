@@ -30,6 +30,7 @@ public class GraphDemo {
         graph.connect("HCM", "LongAn");
         graph.connect("HCM", "BinhDuong");
         graph.connect("HCM", "DongNai");
+        graph.connect("HCM", "DongNai");
         graph.connect("DongNai", "BinhThuan");
         graph.println();
     }

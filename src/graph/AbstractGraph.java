@@ -6,19 +6,21 @@
 package graph;
 
 
-import hash.XHashMap;
-
-import java.util.*;
-
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.PriorityQueue;
 /**
  *
  * @author LTSACH
  */
 public abstract class AbstractGraph<T> implements IGraph<T>{
-//    protected List<VertexNode<T>> nodeList;
-    protected XHashMap<T, VertexNode<T>> nodeList;
+    protected List<VertexNode<T>> nodeList;
+
     public AbstractGraph(){
-        nodeList = new XHashMap<>();
+        nodeList = new LinkedList<>();
     }
     ///Utilities
     protected VertexNode<T> getVertexNode(T vertex){
@@ -32,8 +34,7 @@ public abstract class AbstractGraph<T> implements IGraph<T>{
     ///
     @Override
     public void add(T vertex) {
-//        this.nodeList.add(new VertexNode(vertex));
-        this.nodeList.put(vertex, new VertexNode(vertex));
+        this.nodeList.add(new VertexNode(vertex));
     }
 
     @Override
@@ -55,27 +56,46 @@ public abstract class AbstractGraph<T> implements IGraph<T>{
     @Override
     public abstract void disconnect(T from, T to) throws VertexNotFoundException, EdgeNotFoundException;
 
+    public void checkNullVertex(VertexNode<T> vertexNode) throws VertexNotFoundException {
+        if (vertexNode == null) throw new VertexNotFoundException(vertexNode);
+    }
+    public void checkNullVertex(VertexNode<T> from, VertexNode<T> to) throws VertexNotFoundException {
+        checkNullVertex(from);
+        checkNullVertex(to);
+    }
+
+
     @Override
     public float weight(T from, T to) throws VertexNotFoundException, EdgeNotFoundException{
-        return getVertexNode(from).getEdge(getVertexNode(to)).weight; 
+        VertexNode<T> _from = getVertexNode(from), _to = getVertexNode(to);
+        checkNullVertex(_from, _to);
+        Edge<T> edge = _from.getEdge(_to);
+        if (edge == null) throw new EdgeNotFoundException("Does not exist edge");
+        return edge.weight;
     }
 
     @Override
     public List getOutwardEdges(T from) throws VertexNotFoundException{
-        /*YOUR CODE HERE*/
-        return null; //remove this line
+        VertexNode<T> _from = getVertexNode(from);
+        if (_from == null) throw new VertexNotFoundException(null);
+        return _from.getOutwardEdges();
     }
 
     @Override
     public List getInwardEdges(T to) throws VertexNotFoundException{
-        /*YOUR CODE HERE*/
-        return null; //remove this line
+
+        List<T> inWardEdge = new LinkedList<>();
+        if (to == null) throw new VertexNotFoundException(null);
+        for (VertexNode<T> node : nodeList) {
+            List<T> outwardNode = node.getOutwardEdges();
+            if (outwardNode.contains(to)) inWardEdge.add(node.vertex);
+        }
+        return inWardEdge;
     }
 
     @Override
     public java.util.Iterator<T> iterator(){
-        /*YOUR CODE HERE*/
-        return null; //remove this line
+        return new GraphIterator<>(this, this.nodeList.iterator());
     }
     @Override
     public int size() {
@@ -84,13 +104,15 @@ public abstract class AbstractGraph<T> implements IGraph<T>{
 
     @Override
     public int inDegree(T vertex) throws VertexNotFoundException{
-        /*YOUR CODE HERE*/
-        return 0; //remove this line
+        VertexNode<T> vertexNode = getVertexNode(vertex);
+        if (vertexNode == null) throw new VertexNotFoundException(null);
+        return vertexNode.inDegree();
     }
     @Override
     public int outDegree(T vertex) throws VertexNotFoundException{
-        /*YOUR CODE HERE*/
-        return 0; //remove this line
+        VertexNode<T> vertexNode = getVertexNode(vertex);
+        if (vertexNode == null) throw new VertexNotFoundException(null);
+        return vertexNode.outDegree();
     }
 
     @Override
@@ -168,6 +190,7 @@ class VertexNode<T>{
         }
         return null;
     }
+
     public void removeTo(VertexNode<T> to){
         Iterator<Edge<T>> edgeIt = this.adList.iterator();
         while(edgeIt.hasNext()){

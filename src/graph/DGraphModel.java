@@ -31,15 +31,23 @@ public class DGraphModel<T> extends AbstractGraph<T>{
     }
     @Override
     public void connect(T from, T to) throws VertexNotFoundException{
-        /*YOUR CODE HERE*/
+        VertexNode<T> _from = getVertexNode(from), _to = getVertexNode(to);
+        checkNullVertex(_from, _to);
+        _from.connect(_to);
     }
     @Override
     public void connect(T from, T to, float weight) throws VertexNotFoundException{
-        /*YOUR CODE HERE*/
+        VertexNode<T> _from = getVertexNode(from), _to = getVertexNode(to);
+        checkNullVertex(_from, _to);
+        _from.connect(_to, weight);
     }
     @Override
     public void disconnect(T from, T to) throws VertexNotFoundException, EdgeNotFoundException{
-         /*YOUR CODE HERE*/
+        VertexNode<T> _from = getVertexNode(from), _to = getVertexNode(to);
+        checkNullVertex(_from, _to);
+        Edge<T> edge = _from.getEdge(_to);
+        if (edge == null) throw new EdgeNotFoundException(String.format("E(from:%s, to:%s)", from, to));
+        _from.removeTo(_to);
     }
     @Override
     public void remove(T vertex) throws VertexNotFoundException{
