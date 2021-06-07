@@ -1,3 +1,4 @@
+# Heap
 Default of heap is min heap. To change to max heap, declare like the line below
 
 >  Heap<Integer> heap = new Heap<>(new IntComparator());
@@ -11,3 +12,5 @@ Default of heap is min heap. To change to max heap, declare like the line below
           return o2 - o1; // <- want minheap, change return o1-o2
       }
     }
+              
+# Heap sort                               
