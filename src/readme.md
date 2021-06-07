@@ -1,4 +1,4 @@
-Các thuật sort: BubbleSort,ShellSort,  StraightInsertionSort, StraightSelectionSort -> Folder sorting
+Các thuật sort: BubbleSort,ShellSort,  StraightInsertionSort, StraightSelectionSort -> Folder [sorting](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/sorting)
 
 Graph, toposort: folder [graph](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/graph)
 
