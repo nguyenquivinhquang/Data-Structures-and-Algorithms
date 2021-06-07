@@ -11,7 +11,7 @@ import java.util.Comparator;
  *
  * @author LTSACH
  */
-class IntComparator implements Comparator<Integer>{
+class IntComparator implements Comparator<Integer>{ // <- Maxheap
 
     @Override
     public int compare(Integer o1, Integer o2) {

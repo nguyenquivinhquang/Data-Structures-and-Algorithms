@@ -14,8 +14,8 @@ import java.util.Comparator;
  */
 public class Heap<T> implements IHeap<T>{
     private static final int MAX_CAPACITY = Integer.MAX_VALUE - 8;
-    private T[] elements;
-    private int size;
+    T[] elements;
+    protected int size;
     private int total_size = 0;
     private Comparator<? super T> comparator;
     
@@ -31,13 +31,9 @@ public class Heap<T> implements IHeap<T>{
     /////////////////// Utility methods (private)         ////////////////////
     ////////////////////////////////////////////////////////////////////////// 
 
-    private boolean aLTb(T a, T b){ 
-    /* a less than  b @@ because default heap in testcase of Dr.Sach is MinHeap, so this aLTb will be
-        a greater than b
-
-     */
-        if(this.comparator == null) return a.hashCode() > b.hashCode();
-        else return this.comparator.compare(a,b) > 0;
+    private boolean aLTb(T a, T b){
+        if(this.comparator == null) return a.hashCode() < b.hashCode();
+        else return this.comparator.compare(a,b) < 0;
     }
     private boolean aLTb(int indexA, int  indexB){
         T a = elements[indexA];
@@ -58,7 +54,7 @@ public class Heap<T> implements IHeap<T>{
             this.elements = Arrays.copyOf(this.elements, newCapacity);
         }        
     }
-    private void swap(int a, int b){
+    protected void swap(int a, int b){
         T temp = this.elements[a];
         this.elements[a] = this.elements[b];
         this.elements[b] = temp;
@@ -66,18 +62,18 @@ public class Heap<T> implements IHeap<T>{
     private void reheapUp(int position){
         if (position == 1) return;
         int father = position / 2;
-        if (aLTb(elements[father], elements[position]))
+        if (aLTb(elements[position], elements[father]))
             swap(father, position);
         else return;
         reheapUp(father);
     }
-    private void reheapDown(int position){
+    protected void reheapDown(int position){
         checkCapacity(position);
         int child_l = position * 2, child_r = position * 2 + 1;
         if (child_l > size) return;
         int child = child_l;
-        if (child_r < size ) if (aLTb(child_l, child_r) == true) child = child_r;
-        if (aLTb(position, child)) {
+        if (child_r < size ) if (aLTb(child_r, child_l) == true) child = child_r;
+        if (aLTb(child, position)) {
             swap(position, child);
             reheapDown(child);
         }
@@ -86,7 +82,6 @@ public class Heap<T> implements IHeap<T>{
             if (curNode > size) return  -1;
             if (elements[curNode].equals(item)) return  curNode;
             if (aLTb(item, elements[curNode]) == false) return -1;
-
             return Math.max(getItem(item, curNode * 2), getItem(item,  curNode * 2 + 1));
 
     }
@@ -117,16 +112,19 @@ public class Heap<T> implements IHeap<T>{
     public void remove(T item) {
         int foundIdx = this.getItem(item, 1);
         if(foundIdx == -1) return;
-        
-        swap(foundIdx, size--);
-        if (foundIdx == 1) {
-            reheapDown(1);
-            return;
+
+        //Remove item
+        int copyCount = (this.size) - (foundIdx + 1) + 1;
+        System.arraycopy(this.elements, foundIdx + 1, this.elements, foundIdx, copyCount);
+        this.size -= 1;
+
+        //Determine valid heap [0-> (new size -1)]
+        int startOldData = foundIdx;
+
+        //reheapify from startOldData
+        for (int idx=startOldData; idx <= this.size; idx++) {
+            reheapDown(idx);
         }
-        int parent = foundIdx / 2;
-        if (aLTb(elements[parent], elements[foundIdx]) == true) {
-            reheapUp(foundIdx);
-        } else reheapDown(foundIdx);
     }
 
     @Override

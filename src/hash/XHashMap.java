@@ -68,6 +68,27 @@ public class XHashMap<K, V> implements IMap<K,V>{
 
     @Override
     public V put(K key, V value) {
+        // put new node before head -> Dr.Sach method
+        int index = this.key2index(key);
+        Entry<K, V> curNode = table[index], newNode;
+        while (curNode != null) {
+            if (curNode.key.equals(key)) {
+                curNode.value = value;
+                return value;
+            }
+            curNode = curNode.next;
+
+        }
+        newNode = new Entry<>(key, value, null, this.table[index]);
+        if (this.table[index] != null) this.table[index].prev = newNode;
+        this.table[index] = newNode;
+        ensureLoadFactor(++this.size);
+        return value;
+    }
+    /*
+    @Override
+    // put new node after tail
+    public V put(K key, V value) {
         int index = this.key2index(key);
         ensureLoadFactor(index);
 
@@ -91,7 +112,7 @@ public class XHashMap<K, V> implements IMap<K,V>{
         ensureLoadFactor(++this.size);
         return value;
     }
-
+    */
     @Override
     public V get(K key) {
         int index = this.key2index(key);
@@ -110,14 +131,16 @@ public class XHashMap<K, V> implements IMap<K,V>{
         while(entry != null){
             if (entry.key.equals(key)) {
                 size -= 1;
-                if (entry.prev == null ) {
+                if (entry.prev == null ) { // handle head
                     this.table[index] = entry.next;
                     if (this.table[index] == null) return entry.value;
-                    if (this.table[index].prev != null ) this.table[index].prev = null;
+                    this.table[index].prev = null;
                     return entry.value;
                 }
-                if (entry.next != null ) entry.next.prev = entry.prev;
-                if (entry.prev == null && entry.next == null) this.table[index] = null;
+                if (entry.next != null ) { // handle inside
+                    entry.next.prev = entry.prev;
+                    entry.prev.next = entry.next;
+                } else if (entry.next == null) entry.prev.next = null; // handle tail
                 return entry.value;
             }
             entry = entry.next;
@@ -132,14 +155,16 @@ public class XHashMap<K, V> implements IMap<K,V>{
         while(entry != null){
             if(entry.key.equals(key) && entry.value.equals(value)){
                 size -= 1;
-                if (entry.prev == null ) {
+                if (entry.prev == null ) { // handle head
                     this.table[index] = entry.next;
                     if (this.table[index] == null) return true;
-                    if (this.table[index].prev != null )this.table[index].prev = null;
+                    this.table[index].prev = null;
                     return true;
                 }
-                if (entry.next != null ) entry.next.prev = entry.prev;
-                if (entry.prev == null && entry.next == null) this.table[index] = null;
+                if (entry.next != null ) { // handle inside
+                    entry.next.prev = entry.prev;
+                    entry.prev.next = entry.next;
+                } else if (entry.next == null) entry.prev.next = null; // handle tail
                 return true;
             }
             entry = entry.next;
