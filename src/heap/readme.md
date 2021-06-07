@@ -13,4 +13,6 @@ Default of heap is min heap. To change to max heap, declare like the line below
       }
     }
               
-# Heap sort                               
+# Heap sort               
+  Use minheap to sort Descending.
+  Use maxheap to sort Ascending. 
