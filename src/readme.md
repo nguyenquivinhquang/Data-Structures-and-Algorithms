@@ -1,7 +1,7 @@
 Các thuật sort: BubbleSort,ShellSort,  StraightInsertionSort, StraightSelectionSort -> Folder [sorting](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/sorting)
 
-Graph, toposort: folder [graph](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/graph)
-
+Graph: folder [graph](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/graph)
+TopoSort: [link](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/blob/bf0c3f063963b008eebd941bf85049d7340910dc/src/graph/DGraphModel.java#L142)
 hash: folder [Hash](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/hash)
 
 heap, heapSort: folder [Heap](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/heap)
