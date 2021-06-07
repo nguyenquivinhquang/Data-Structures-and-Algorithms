@@ -14,4 +14,4 @@ Stack, Queue, PriorityQueue -> folder [stacknqueue](https://github.com/nguyenqui
 
 Balance search tree -> folder [tree](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/tree)
 
-## Note: All tree data structure, starting index is 1, not 0 as usual
+## Note: All tree data structure(BST, Heap), starting index is 1, not 0 as usual
