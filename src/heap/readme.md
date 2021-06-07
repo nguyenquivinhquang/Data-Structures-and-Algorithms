@@ -4,10 +4,10 @@ Default of heap is min heap. To change to max heap, declare like the line below
 
   
   >
-  class IntComparator implements Comparator<Integer>{ // <- Maxheap
+    class IntComparator implements Comparator<Integer>{ // <- Maxheap
 
-    @Override
-    public int compare(Integer o1, Integer o2) {
-        return o2 - o1;
+      @Override
+      public int compare(Integer o1, Integer o2) {
+          return o2 - o1;
+      }
     }
-  }
