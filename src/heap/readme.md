@@ -1,6 +1,6 @@
 Default of heap is min heap. To change to max heap, declare like the line below
 
-> HeapSort<Integer> heapSort = new HeapSort<>(new  IntComparator()); 
+>  Heap<Integer> heap = new Heap<>(new IntComparator());
 
   
   >
@@ -8,6 +8,6 @@ Default of heap is min heap. To change to max heap, declare like the line below
 
       @Override
       public int compare(Integer o1, Integer o2) {
-          return o2 - o1; // <- want min heap, change return o1-o2
+          return o2 - o1; // <- want minheap, change return o1-o2
       }
     }
