@@ -8,7 +8,7 @@ Hash -> folder [Hash](https://github.com/nguyenquivinhquang/Data-Structures-and-
 
 Heap, heap sort -> folder [Heap](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/heap)
 
-ArrayList, Single linked list, Double linked list -> folder [List](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/list)
+ArrayList, Single linked list, Double linked list -> folder [list](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/list)
 
 Stack, Queue, PriorityQueue -> folder [stacknqueue](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/stacknqueue)
 
