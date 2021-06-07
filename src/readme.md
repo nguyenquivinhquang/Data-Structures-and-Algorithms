@@ -13,3 +13,5 @@ ArrayList, Single linked list, Double linked list -> [List](https://github.com/n
 Stack, Queue, PriorityQueue -> folder [stacknqueue](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/stacknqueue)
 
 Balance search tree -> folder [tree](https://github.com/nguyenquivinhquang/Data-Structures-and-Algorithms/tree/main/src/tree)
+
+##Note: All tree data structure, starting index is 1, not 0 as usual
