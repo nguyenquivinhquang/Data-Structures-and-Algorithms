@@ -105,7 +105,7 @@ public class Heap<T> implements IHeap<T>{
     @Override
     public T peek() {
         if(this.size == 0) throw new RuntimeException("Peeking from an empty heap!");
-        return this.elements[0];
+        return this.elements[1];
     }
     
     @Override
