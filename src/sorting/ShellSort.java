@@ -11,8 +11,7 @@ public class ShellSort<E> implements ISort<E> {
     }  
     public static <E> void sortSegment(E[] array, int segment_idx, int num_segment,  
             Comparator<E> comparator){  
-        int current;  
-        int walker;  
+        int current, walker;
         E temp;  
         current = segment_idx + num_segment;  
         while(current < array.length){  

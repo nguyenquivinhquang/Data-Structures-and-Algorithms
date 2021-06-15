@@ -13,9 +13,8 @@ public class PointComparator implements Comparator<Point2D>{
 
     @Override
     public int compare(Point2D o1, Point2D o2) {
-        if(Math.abs(o1.getX() - o2.getX()) < 1e-7) return 0;
-        else if(o1.getX() < o2.getX()) return -1;
-        else return 1;
+        int t = (int) (Math.abs(o1.distanceTo(new Point2D(0,0))) - Math.abs(o2.distanceTo(new Point2D(0,0))));
+        return t ;
     }
 
 }
